@@ -1,0 +1,124 @@
+# Tabs - Type A
+
+This is a tabs component. Tabs make it easy to switch between different views.
+
+[Note]:- There is also another type of tabs component called TabsTypeB component.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>tabsData</td>
+    <td>Array`<TabsDataProps>`</td>
+    <td>Yes</td>
+    <td>It is an array of `TabsDataProps` objects</td>
+  </tr>
+  <tr>
+    <td>tabHandler</td>
+    <td>function</td>
+    <td>Yes</td>
+    <td>If you want to do something on changing tabs, then you can do that passing the tabHandler function</td>
+  </tr>
+  <tr>
+    <td>defaultActiveKey</td>
+    <td>number</td>
+    <td>No</td>
+    <td>
+      The number that you pass in defaultActiveKey will set the corresponding tab as active tab by default. 
+    </td>
+  </tr>
+</table>
+
+# TabsDataProps
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>key</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>Used for unique identification of a node in the array</td>
+  </tr>
+  <tr>
+    <td>label</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>Tab label</td>
+  </tr>
+  <tr>
+    <td>children</td>
+    <td>ReactNode</td>
+    <td>Yes</td>
+    <td>The content that will be shown when the tab is active</td>
+  </tr>
+</table>
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<BrowserWindow>
+  <Tabs>
+    <TabItem value="apple" label="Apple">
+      This is an apple 🍎
+    </TabItem>
+    <TabItem value="orange" label="Orange">
+      This is an orange 🍊
+    </TabItem>
+    <TabItem value="banana" label="Banana">
+      This is a banana 🍌
+    </TabItem>
+  </Tabs>
+</BrowserWindow>
+
+Note:- DummyComponent1 and DummyComponent3 are just some dummy components. Feel free to create some dummy components yourself.
+
+```js title="/src/components/ExampleTabs.js" showLineNumbers
+import DummyComponent1 from "src/components/dummy-components/Component1";
+import DummyComponent3 from "src/components/dummy-components/Component3";
+import { TabsDataProps } from "canary-design";
+import { TabsTypeA } from "canary-design";
+
+const tabsData: TabsDataProps[] = [
+  {
+    key: "1",
+    label: "Tab 1",
+    children: <DummyComponent1 />,
+  },
+  {
+    key: "2",
+    label: "Tab 2",
+    children: "Tab2 content is shown here.",
+  },
+  {
+    key: "3",
+    label: "Tab 3",
+    children: <DummyComponent3 />,
+  },
+];
+
+const ExampleTabs = () => {
+  const tabHandler = (index: number) => {
+    console.log(`active tab index: ${index}`);
+  };
+
+  return (
+    <TabsTypeA
+      tabsData={tabsData}
+      tabHandler={tabHandler}
+      defaultActiveKey={1}
+    />
+  );
+};
+```
