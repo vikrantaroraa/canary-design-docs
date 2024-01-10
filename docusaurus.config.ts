@@ -1,10 +1,11 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import prismDarkTheme from "./src/utils/prismDark";
 
 const config: Config = {
   title: "Canary Design",
-  tagline: "Dinosaurs are cool",
+  tagline: "A component library built in react and typescript",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -126,7 +127,8 @@ const config: Config = {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      darkTheme: prismDarkTheme,
+      // darkTheme: prismThemes.vsDark,
     },
   } satisfies Preset.ThemeConfig,
 };

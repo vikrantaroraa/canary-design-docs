@@ -1,0 +1,112 @@
+# File Upload
+
+The `FileUpload` component allows you to upload the files on a website (or a webapp). You can upload the file ( like text documents, pdfs, pictures and videos etc ) by either selecting it or by dragging it into the component viewport.
+
+You can use this component when you need to:-
+
+- Upload one or more files.
+- Show the process of uploading.
+- Upload files by dragging and dropping.
+
+The `FileUpload` component is internally made up of 2 components, the `<SelectFile />` component and the `<DragAndDrop />` component. The `<SelectFile />` only allows to upload the file by manually selecting a file by opening the desktop storage window. The `<DragAndDrop />` allows us to upload the file both by opening the desktop storage window and by dragging the file into the component viewport.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>multiple</td>
+    <td>boolean</td>
+    <td>Yes</td>
+    <td>
+      when `true`, it allows you to upload multiple files. If it is `false`, the
+      user can only upload a single file
+    </td>
+  </tr>
+  <tr>
+    <td>getFiles</td>
+    <td>function `(allSelectedFiles: FileType[]) => void`</td>
+    <td>Yes</td>
+    <td>
+      If you want to do something when a file ( or multiple files ) is uploaded,
+      then you can do it by passing the getFiles function
+    </td>
+  </tr>
+  <tr>
+    <td>showImageWall</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>
+      If you want to hide the image wall ( i.e the component that shows the
+      uploaded files ), then you can set this to `false`. Its default value is `true`
+
+      Note:- This prop is only passed to the `<SelectFile />` component.
+    </td>
+
+  </tr>
+  <tr>
+    <td>showDeleteIcon</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>
+      If you want to hide the delete icon, then you can set this to `false`. Its default value is `true`
+
+      Note:- This prop is only passed to the `<SelectFile />` component.
+    </td>
+
+  </tr>
+  <tr>
+    <td>dragging</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>
+      If you want to enable the drag-and-drop feature for file upload, then you can set this to `true`. Its default value is `false`
+    </td>
+  </tr>
+</table>
+
+Note:- The type `FileType` is used so that all the returned files have a common type. All returned files will have a `url` ( where they are stored in the system ), `name`, `id`, `size` ( in kb ) and `type` ( like pdf, image/jpeg, image/png, text etc ).
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<BrowserWindow>
+  <Tabs>
+    <TabItem value="apple" label="Apple">
+      This is an apple 🍎
+    </TabItem>
+    <TabItem value="orange" label="Orange">
+      This is an orange 🍊
+    </TabItem>
+    <TabItem value="banana" label="Banana">
+      This is a banana 🍌
+    </TabItem>
+  </Tabs>
+</BrowserWindow>
+
+```js title="/src/components/FileUploadExample.ts" showLineNumbers
+import React from "react";
+import { FileUpload } from "canary-design";
+
+function FileUploadExample() {
+  return (
+    <div>
+      <FileUpload
+        multiple
+        getFiles={(files: unknown) => {
+          console.log("files from getFiles: ", files);
+        }}
+        showImageWall={false}
+        showDeleteIcon={false}
+        dragging
+      />
+    </div>
+  );
+}
+```

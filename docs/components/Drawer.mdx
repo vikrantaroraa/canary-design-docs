@@ -1,0 +1,164 @@
+# Drawer
+
+Navigation is an important part of any website, as a good navigation setup allows users to move around the site quickly and efficiently. This component provides a drawer (also referred to as a sidebar) which can be used for navigation in a web app.
+
+Note-1:- The Drawer component has `position: fixed` so it always gets positioned according to the viewport, i.e. top: 0, left: 0 (or right: 0). If you want to position the drawer w.r.t. some parent element say X, then you can pass `position: absolute` to the style prop of the Drawer and give X the `position: relative`.
+
+Note-2:- The Drawer below is positioned w.r.t. the parent container element as explained in the Note-1 above.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>showDrawer</td>
+    <td>boolean</td>
+    <td>Yes</td>
+    <td>Controls the opening and closing of the drawer.</td>
+  </tr>
+  <tr>
+    <td>slideFrom</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>
+      Controls where the drawer slides from. `slideFrom` only takes either of
+      the 2 values: `left` and `right`
+    </td>
+  </tr>
+  <tr>
+    <td>children</td>
+    <td>`<JSX.Element>` | Array`<JSX.Element>`</td>
+    <td>Yes</td>
+    <td>
+      The component that you pass to children will be rendered inside the drawer 
+    </td>
+  </tr>
+  <tr>
+    <td>style</td>
+    <td>object</td>
+    <td>No</td>
+    <td>
+      A style object that can be used to style the drawer
+    </td>
+  </tr>
+</table>
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<BrowserWindow>
+  <Tabs>
+    <TabItem value="apple" label="Apple">
+      This is an apple 🍎
+    </TabItem>
+    <TabItem value="orange" label="Orange">
+      This is an orange 🍊
+    </TabItem>
+    <TabItem value="banana" label="Banana">
+      This is a banana 🍌
+    </TabItem>
+  </Tabs>
+</BrowserWindow>
+
+```js title="/src/components/Drawer.ts" showLineNumbers
+import React, { useState } from "react";
+import cartIcon from "src/assets/cart.svg";
+import wishListIcon from "src/assets/heart.svg";
+import userIcon from "src/assets/user.svg";
+import closeIcon from "src/assets/close-icon.svg";
+import menuIcon from "src/assets/menu-icon.svg";
+import { Drawer } from "canary-design";
+
+const ExampleDrawer = () => {
+  const [showDrawer, setShowDrawer] = useState(false);
+
+  const toggleShowDrawer = () => {
+    setShowDrawer(!showDrawer);
+  };
+
+  const appHeaderStyle: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "#f2f2f2",
+    border: "1px solid #ddd",
+    padding: "12px 28px",
+    fontSize: "18px",
+    fontWeight: 500,
+    cursor: "pointer",
+  };
+
+  const navMenuStyle: React.CSSProperties = {
+    display: "flex",
+    gap: "65px",
+  };
+
+  const imageContainerStyle: React.CSSProperties = {
+    height: 26,
+    width: 26,
+  };
+
+  const imageStyle: React.CSSProperties = {
+    height: "100%",
+    width: "100%",
+  };
+
+  const logoAndCloseIconStyle: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "#d3d3d3",
+    padding: "20px 28px",
+    fontSize: "22px",
+    fontWeight: 700,
+    color: "#5a5a5a",
+    borderBottom: "1px solid #ddd",
+    cursor: "pointer",
+  };
+
+  return (
+    <div
+      style={{ border: "2px dotted", height: "100vh", position: "relative" }}
+    >
+      <div style={appHeaderStyle}>
+        <span onClick={toggleShowDrawer} title="Click to open menu drawer">
+          <span style={imageContainerStyle}>
+            <img src={menuIcon} style={imageStyle} />
+          </span>
+        </span>
+        <div style={navMenuStyle}>
+          <span style={imageContainerStyle} title="dummy icon">
+            <img src={wishListIcon} style={imageStyle} />
+          </span>
+          <span style={imageContainerStyle} title="dummy icon">
+            <img src={cartIcon} style={imageStyle} />
+          </span>
+          <span style={imageContainerStyle} title="dummy icon">
+            <img src={userIcon} style={imageStyle} />
+          </span>
+        </div>
+      </div>
+      <Drawer
+        showDrawer={showDrawer}
+        slideFrom={"left"}
+        style={{
+          position: "absolute",
+        }}
+      >
+        <div style={logoAndCloseIconStyle}>
+          <span>Flipkart</span>
+          <span onClick={toggleShowDrawer} title="Click to close menu drawer">
+            <span style={imageContainerStyle}>
+              <img src={closeIcon} style={imageStyle} />
+            </span>
+          </span>
+        </div>
+      </Drawer>
+    </div>
+  );
+};
+```

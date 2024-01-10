@@ -9,9 +9,10 @@ import { themes, type PrismTheme } from "prism-react-renderer";
 
 const baseTheme = themes.vsDark;
 
-const prismDarkTheme = {
+export default {
   plain: {
-    color: "#D4D4D4",
+    // color: "#D4D4D4",
+    color: "#9CDCFE",
     backgroundColor: "#212121",
   },
   styles: [
@@ -79,5 +80,3 @@ const prismDarkTheme = {
     },
   ],
 } satisfies PrismTheme;
-
-export default prismDarkTheme;

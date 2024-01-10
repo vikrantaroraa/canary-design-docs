@@ -21,16 +21,16 @@ This is a tabs component. Tabs make it easy to switch between different views.
   </tr>
   <tr>
     <td>tabHandler</td>
-    <td>function</td>
+    <td>function `(index: number) => void`</td>
     <td>Yes</td>
-    <td>If you want to do something on changing tabs, then you can do that passing the tabHandler function</td>
+    <td>If you want to do something on switching tabs, then you can do it by passing the tabHandler function</td>
   </tr>
   <tr>
     <td>defaultActiveKey</td>
     <td>number</td>
     <td>No</td>
     <td>
-      The number that you pass in defaultActiveKey will set the corresponding tab as active tab by default. 
+      The number that you pass in defaultActiveKey will set the corresponding tab as active tab by default
     </td>
   </tr>
 </table>
@@ -84,7 +84,7 @@ import TabItem from "@theme/TabItem";
 
 Note:- DummyComponent1 and DummyComponent3 are just some dummy components. Feel free to create some dummy components yourself.
 
-```js title="/src/components/ExampleTabs.js" showLineNumbers
+```js title="/src/components/ExampleTabs.ts" showLineNumbers
 import DummyComponent1 from "src/components/dummy-components/Component1";
 import DummyComponent3 from "src/components/dummy-components/Component3";
 import { TabsDataProps } from "canary-design";
@@ -108,7 +108,7 @@ const tabsData: TabsDataProps[] = [
   },
 ];
 
-const ExampleTabs = () => {
+const ExampleTabsTypeA = () => {
   const tabHandler = (index: number) => {
     console.log(`active tab index: ${index}`);
   };

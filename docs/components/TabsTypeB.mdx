@@ -1,0 +1,100 @@
+# Tabs - Type B
+
+This is another tabs component. Tabs make it easy to switch between different views. It differs from the TabsTypeA component only in terms of props and the boilerplate code, but it works exactly the same.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>children</td>
+    <td>Array`<JSX.Element>`</td>
+    <td>Yes</td>
+    <td>
+      The children is tab data which is used to render the tabs and their
+      content
+    </td>
+  </tr>
+  <tr>
+    <td>tabHandler</td>
+    <td>function</td>
+    <td>Yes</td>
+    <td>
+      If you want to do something on switching tabs, then you can do it by
+      passing the tabHandler function
+    </td>
+  </tr>
+  <tr>
+    <td>activeTab</td>
+    <td>number</td>
+    <td>Yes</td>
+    <td>
+      It is the index of active tab that you set in the tabHandler function
+    </td>
+  </tr>
+</table>
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<BrowserWindow>
+  <Tabs>
+    <TabItem value="apple" label="Apple">
+      This is an apple 🍎
+    </TabItem>
+    <TabItem value="orange" label="Orange">
+      This is an orange 🍊
+    </TabItem>
+    <TabItem value="banana" label="Banana">
+      This is a banana 🍌
+    </TabItem>
+  </Tabs>
+</BrowserWindow>
+
+Note:- DummyComponent1, DummyComponent2 and DummyComponent3 are just some dummy components. Feel free to create some dummy components yourself.
+
+```js title="/src/components/ExampleTabs.ts" showLineNumbers
+import DummyComponent1 from "src/components/dummy-components/Component1";
+import DummyComponent2 from "src/components/dummy-components/Component2";
+import DummyComponent3 from "src/components/dummy-components/Component3";
+import { PanelContainer, Tab, TabPanel, TabsTypeB } from "canary-design";
+
+const ExampleTabsTypeB = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabHandler = (index: number) => {
+    setActiveTab(index);
+    console.log(`active tab index: ${index}`);
+  };
+
+  const tabsArray = ["Tab 1", "Tab 2", "Tab 3"];
+
+  return (
+    <>
+      <TabsTypeB tabHandler={tabHandler} activeTab={activeTab}>
+        {tabsArray.map((tab, index) => (
+          <Tab key={index} label={tab} />
+        ))}
+      </TabsTypeB>
+
+      <PanelContainer activeTab={activeTab}>
+        <TabPanel>
+          <DummyComponent1 />
+        </TabPanel>
+        <TabPanel>
+          <DummyComponent2 />
+        </TabPanel>
+        <TabPanel>
+          <DummyComponent3 />
+        </TabPanel>
+      </PanelContainer>
+    </>
+  );
+};
+```

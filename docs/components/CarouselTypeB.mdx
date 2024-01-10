@@ -1,0 +1,302 @@
+# Carousel - Type B
+
+This is another Carousel component. Carousel allows us to show multiple images in the same space. It can be used when:-
+
+- When there is a group of content on the same level.
+- When there is insufficient content space, it can be used to save space.
+- Commonly used for a group of pictures/cards.
+
+It differs from the `CarouselTypeA` component in terms of props and the boilerplate code. Whereas, the `CarouselTypeA`
+receives an array of image addresses, the `CarouselTypeB` component receives the `children` prop. It wraps
+each image inside an `ImagePanel` component and shows the ImagePanel child element corresponding to the active index.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>children</td>
+    <td>Array`JSX.Element[]`</td>
+    <td>Yes</td>
+    <td>
+      children is an array of child elements which contains each image wrapped in an `<ImagePanel />` component
+    </td>
+  </tr>
+  <tr>
+    <td>rotate</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>
+      When `true`, it will allow the carousel to jump from last image to first image and vice-versa. Default value is `false` 
+    </td>
+  </tr>
+  <tr>
+    <td>UserIndicatorComponent</td>
+    <td>React.FC`<UserIndicator
+    ComponentProps>`</td>
+    <td>No</td>
+    <td>
+      User can pass this component to replace the default indicator `<Dots />` component
+    </td>
+  </tr>
+  <tr>
+    <td>UserNavigationButtons</td>
+    <td>React.FC`<UserNavigation
+    ButtonsProps>`</td>
+    <td>No</td>
+    <td>
+      User can pass this component to replace the default left and right `<Navigation />` component
+    </td>
+  </tr>
+</table>
+
+### UserIndicatorComponentProps
+
+The `UserIndicatorComponent` renders a single dot and is mapped over the images array to render the corresponding dot for each image. It should accept the follwing props.
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>index</td>
+    <td>number</td>
+    <td>Yes</td>
+    <td>The index of the current image in the array</td>
+  </tr>
+  <tr>
+    <td>activeIndex</td>
+    <td>number</td>
+    <td>Yes</td>
+    <td>The index of the current selected image in the array</td>
+  </tr>
+  <tr>
+    <td>changeImage</td>
+    <td>(index: number) => void</td>
+    <td>Yes</td>
+    <td>
+      A function that gets called on clicking a dot. When you click a dot, its
+      corresponding index is set as the activeIndex
+    </td>
+  </tr>
+</table>
+
+### UserNavigationButtonsProps
+
+The `UserNavigationButtons` can be used to pass a user navigation component. It should accept the following props.
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>slideLeft</td>
+    <td>( ) => void</td>
+    <td>Yes</td>
+    <td>
+      A function that will be passed to enable the left navigation in the
+      carousel
+    </td>
+  </tr>
+  <tr>
+    <td>slideRight</td>
+    <td>( ) => void</td>
+    <td>Yes</td>
+    <td>
+      A function that will be passed to enable the right navigation in the
+      carousel
+    </td>
+  </tr>
+</table>
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<BrowserWindow>
+  <Tabs>
+    <TabItem value="apple" label="Apple">
+      This is an apple 🍎
+    </TabItem>
+    <TabItem value="orange" label="Orange">
+      This is an orange 🍊
+    </TabItem>
+    <TabItem value="banana" label="Banana">
+      This is a banana 🍌
+    </TabItem>
+  </Tabs>
+</BrowserWindow>
+
+```js title="ExampleCarousel.ts" showLineNumbers
+import Image1 from "src/assets/carousel-image-1.jpg";
+import Image2 from "src/assets/carousel-image-2.jpg";
+import Image3 from "src/assets/carousel-image-3.jpg";
+import Image4 from "src/assets/carousel-image-4.jpg";
+import Image5 from "src/assets/carousel-image-5.jpg";
+import UserIndicatorComponent from "src/components/dummy-components/UserIndicatorComponent";
+import UserNavigationButtons from "src/components/dummy-components/UserNavigationButtons";
+import { CarouselTypeB, ImagePanel } from "canary-design";
+
+const images = [Image1, Image2, Image3, Image4, Image5];
+
+function ExampleCarouselTypeB() {
+  return (
+    <div>
+      <CarouselTypeB
+        rotate
+        UserIndicatorComponent={(props) => (
+          <UserIndicatorComponent {...props} />
+        )}
+        UserNavigationButtons={(props) => <UserNavigationButtons {...props} />}
+      >
+        {images.map((image, index) => (
+          <ImagePanel key={index}>
+            <img src={image} alt="" />
+          </ImagePanel>
+        ))}
+
+        {/* Note:-  We can either map over the images array to render images using <ImagePanel> component or 
+        we can write all <ImagePanel> components manually passing them the <img> tag and image index, both 
+        works fine. However, using map is a better approach as it ensures that we do not add any extra or any 
+        less <ImagePanel> components  */}
+
+        {/* <ImagePanel>
+          <img src={images[0]} alt="" />
+        </ImagePanel>
+        <ImagePanel>
+          <img src={images[1]} alt="" />
+        </ImagePanel>
+        <ImagePanel>
+          <img src={images[2]} alt="" />
+        </ImagePanel>
+        <ImagePanel>
+          <img src={images[3]} alt="" />
+        </ImagePanel>
+        <ImagePanel>
+          <img src={images[4]} alt="" />
+        </ImagePanel> */}
+      </CarouselTypeB>
+    </div>
+  );
+}
+```
+
+### UserIndicatorComponent
+
+```js title="src/components/UserIndicatorComponent/index.ts" showLineNumbers
+import styles from "src/components/UserIndicatorComponent/index.module.css";
+
+interface UserIndicatorComponentProps {
+  index: number;
+  activeIndex: number;
+  changeImage: (index: number) => void;
+}
+
+const UserIndicatorComponent = ({
+  index,
+  activeIndex,
+  changeImage,
+}: UserIndicatorComponentProps) => {
+  return (
+    <div className={styles["dot"]} onClick={() => changeImage(index)}>
+      {index === activeIndex && <div className={styles["inner-dot"]}></div>}
+    </div>
+  );
+};
+```
+
+```css title="src/components/UserIndicatorComponent/index.module.css"
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: #efefef;
+  border-radius: 20%;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.inner-dot {
+  height: 100%;
+  width: 100%;
+  border-radius: 20%;
+  background-color: grey;
+}
+```
+
+### UserNavigationButtons
+
+```js title="src/components/UserNavigationButtons/index.ts" showLineNumbers
+import styles from "src/components/UserNavigationButtons/index.module.css";
+import leftIconBlack from "src/assets/caret-left-black.svg";
+import rightIconBlack from "src/assets/caret-right-black.svg";
+import leftIconWhite from "src/assets/caret-left-white.png";
+import rightIconWhite from "src/assets/caret-right-white.png";
+
+interface UserNavigationButtonsProps {
+  slideLeft: () => void;
+  slideRight: () => void;
+}
+
+function UserNavigationButtons({
+  slideLeft,
+  slideRight,
+}: UserNavigationButtonsProps) {
+  return (
+    <div className={styles["navigation-buttons"]}>
+      <div className={styles["nav-button"]} onClick={slideLeft}>
+        <div className={styles["icon-container"]}>
+          <img src={leftIconWhite} />
+        </div>
+      </div>
+      <div className={styles["nav-button"]} onClick={slideRight}>
+        <div className={styles["icon-container"]}>
+          <img src={rightIconWhite} />
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+```css title="src/components/UserNavigationButtons/index.module.css"
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 8px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-container {
+  height: 24px;
+  width: 24px;
+}
+
+.icon-container img {
+  height: 100%;
+  width: 100%;
+}
+```
