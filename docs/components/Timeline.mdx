@@ -1,0 +1,132 @@
+# Timeline
+
+The timeline displays a list of events in chronological order.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>data</td>
+    <td>Array`<object>`</td>
+    <td>Yes</td>
+    <td>The data prop is an array of objects. Each object contains 2 key-value pairs. The first key is `milestoneIcon`. Its value is the url of the the icon which you want to show for that particular milestone.
+    The second key is `componentData`. Its value will be an object that will be used as a prop object for `UserTimelineComponent` while mapping the timeline.</td>
+  </tr>
+  <tr>
+    <td>UserTimelineComponent</td>
+    <td>React.FC`<unknown>`</td>
+    <td>Yes</td>
+    <td>The component that will be rendered to create the timeline</td>
+  </tr>
+  <tr>
+    <td>userMilestoneIcon</td>
+    <td>string | null</td>
+    <td>No</td>
+    <td>
+      The url of the icon that you want to show for every milestone on the timeline. By default, the `Timeline` component picks the `milestoneIcon` passed in the data array prop.
+    </td>
+  </tr>
+   <tr>
+    <td>milestoneIconSize</td>
+    <td>number</td>
+    <td>No</td>
+    <td>
+      The size of the milestone icon. This size will also apply to the image that you can pass to replace the milestone icon. Its default value is `40px`.
+    </td>
+  </tr> <tr>
+    <td>showSameMilestoneIcon</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>
+      When `true`, it will show a user provided icon i.e. `userMilestoneIcon` for every milestone, its value is `false` by default.
+    </td>
+  </tr> <tr>
+    <td>timelineGap</td>
+    <td>number</td>
+    <td>No</td>
+    <td>
+      The gap (margin) between two timeline entries on the page. Its default value is `16px`.
+    </td>
+  </tr>
+</table>
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<BrowserWindow>
+  <Tabs>
+    <TabItem value="apple" label="Apple">
+      This is an apple 🍎
+    </TabItem>
+    <TabItem value="orange" label="Orange">
+      This is an orange 🍊
+    </TabItem>
+    <TabItem value="banana" label="Banana">
+      This is a banana 🍌
+    </TabItem>
+  </Tabs>
+</BrowserWindow>
+
+Note:- UserTimelineComponent and defaultUserIcon are just a dummy component and dummy icon. Feel free to create some dummy components and icons yourself.
+
+```js title="/src/components/ExampleTimeline.ts" showLineNumbers
+import React from "react";
+import { Timeline } from "canary-design";
+import UserTimelineComponent from "src/components/dummy-components/UserTimelineComponent";
+import defaultUserIcon from "src/assets/timeline-default-user.svg";
+
+const timelineDataArray = [
+  {
+    milestoneIcon: "https://source.unsplash.com/iEEBWgY_6lA",
+    componentPropsData: {
+      notificationTitle: "John liked your photo",
+      time: "8:25 am",
+      content: "The photo of you and the dog was liked by John.",
+    },
+  },
+  {
+    milestoneIcon: "https://source.unsplash.com/4VLoCH_YVy8",
+    componentPropsData: {
+      notificationTitle: "Emma commented on your post",
+      time: "9:00 am",
+      content: "Emma left a comment on your post.",
+    },
+  },
+  {
+    milestoneIcon: "https://source.unsplash.com/XXSLiAQMP4A",
+    componentPropsData: {
+      notificationTitle: "Rose sent you a message",
+      time: "11:42 am",
+      content: "Hi Vikrant, I have been thinking about you.",
+    },
+  },
+  {
+    milestoneIcon: "https://source.unsplash.com/ZHvM3XIOHoE",
+    componentPropsData: {
+      notificationTitle: "Nathan liked your photo",
+      time: "2:54 pm",
+      content: "Your photo was liked by Nathan.",
+    },
+  },
+];
+
+const ExampleTimeline = () => {
+  return (
+    <Timeline
+      data={timelineDataArray}
+      milestoneIconSize={40}
+      timelineGap={16}
+      showSameMilestoneIcon={false}
+      UserTimelineComponent={(props) => <UserTimelineComponent {...props} />}
+      userMilestoneIcon={defaultUserIcon}
+    />
+  );
+};
+```

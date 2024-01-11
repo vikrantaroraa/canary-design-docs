@@ -1,0 +1,144 @@
+# Steps
+
+Steps is a navigation component that guides users through the steps of a task. When a given task is complicated
+or has a certain sequence in the series of subtasks, we can decompose it into several steps to make things easier.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>steps</td>
+    <td>Array`<StepsDataProps>`</td>
+    <td>Yes</td>
+    <td>It is an array of `StepsDataProps` objects</td>
+  </tr>
+  <tr>
+    <td>activeStep</td>
+    <td>number</td>
+    <td>Yes</td>
+    <td>It is the active step index</td>
+  </tr>
+</table>
+
+# StepsDataProps
+
+Each object in the `steps` array will be used to render a step. Every step object should be of the following type.
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>title</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>It is the title of the step</td>
+  </tr>
+  <tr>
+    <td>content</td>
+    <td>ReactNode</td>
+    <td>Yes</td>
+    <td>The content that will be rendered when a particular step is active</td>
+  </tr>
+</table>
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<BrowserWindow>
+  <Tabs>
+    <TabItem value="apple" label="Apple">
+      This is an apple 🍎
+    </TabItem>
+    <TabItem value="orange" label="Orange">
+      This is an orange 🍊
+    </TabItem>
+    <TabItem value="banana" label="Banana">
+      This is a banana 🍌
+    </TabItem>
+  </Tabs>
+</BrowserWindow>
+
+Note:- DummyComponent1, DummyComponent2 and DummyComponent3 are just some dummy components. Feel free to create some dummy components yourself.
+
+```js title="/src/components/ExampleSteps.ts" showLineNumbers
+import React, { useState } from "react";
+import { Button } from "canary-design";
+import { Steps } from "canary-design";
+import { StepsDataProps } from "canary-design";
+import DummyComponent1 from "src/components/dummy-components/Component1";
+import DummyComponent2 from "src/components/dummy-components/Component2";
+import DummyComponent3 from "src/components/dummy-components/Component3";
+
+const steps: StepsDataProps[] = [
+  {
+    title: "User details",
+    content: <DummyComponent1 />,
+  },
+  {
+    title: "Payment",
+    content: "Second-content",
+  },
+  {
+    title: "Address",
+    content: <DummyComponent2 />,
+  },
+  {
+    title: "Booking confirmation",
+    content: <DummyComponent3 />,
+  },
+];
+
+const ExampleSteps = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
+  const stepsContentStyle: React.CSSProperties = {
+    borderRadius: "8px",
+    marginTop: "1rem",
+    padding: "10px",
+    border: "1px dotted",
+    backgroundColor: "rgba(0, 0, 0, 0.02)",
+    minHeight: "300px",
+  };
+
+  const navigationButtonsStyle: React.CSSProperties = {
+    marginTop: "1rem",
+    display: "flex",
+    gap: "0.5rem",
+  };
+
+  return (
+    <div style={{ padding: "5px" }}>
+      <Steps steps={steps} activeStep={activeStep} />
+      <div style={stepsContentStyle}>{steps[activeStep].content}</div>
+      <div style={navigationButtonsStyle}>
+        <Button
+          type="fill"
+          onClick={() => {
+            if (activeStep !== steps.length - 1)
+              return setActiveStep(activeStep + 1);
+            alert("Do Something Magical!");
+          }}
+        >
+          {activeStep === steps.length - 1 ? "Finish" : "Next"}
+        </Button>
+        {activeStep !== 0 && (
+          <Button onClick={() => setActiveStep(activeStep - 1)}>
+            Previous
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+};
+```

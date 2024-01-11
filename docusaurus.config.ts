@@ -2,11 +2,12 @@ import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 import prismDarkTheme from "./src/utils/prismDark";
+import FooterMessage from "./src/components/FooterMessage";
 
 const config: Config = {
   title: "Canary Design",
   tagline: "A component library built in react and typescript",
-  favicon: "img/favicon.ico",
+  favicon: "images/canary.ico",
 
   // Set the production url of your site here
   url: "https://your-docusaurus-site.example.com",
@@ -123,7 +124,8 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Canary Design. Made with 💗 in Kashipur, Uttarakhand ( India ).`,
+      // `extra icons -> 👋🏼 🙂 ❤ 💗 ❤️ `,
     },
     prism: {
       theme: prismThemes.github,
