@@ -26,7 +26,7 @@ Tour is a popup component that can be used for guiding users through a product.
     <td>children</td>
     <td>`JSX.Element` | Array`JSX.Element`</td>
     <td>Yes</td>
-    <td>The component that needs to explained ( shown around ) in the tour</td>
+    <td>The component that needs to be explained ( shown around ) in the tour</td>
   </tr>
 </table>
 
@@ -92,8 +92,9 @@ import TabItem from "@theme/TabItem";
 ```js title="/src/components/ExampleTour.ts" showLineNumbers
 import React, { useRef } from "react";
 import { Tour } from "canary-design";
+import { TourData } from "canary-design";
 
-const tourData = [
+const tourData: TourData[] = [
   {
     step: "1",
     content: "Hey, this is a span tag.",
