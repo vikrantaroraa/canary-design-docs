@@ -6,7 +6,7 @@ import FooterMessage from "./src/components/FooterMessage";
 
 const config: Config = {
   title: "Canary Design",
-  tagline: "A component library built in react and typescript",
+  tagline: "A component library built in React and Typescript",
   favicon: "images/canary.ico",
 
   // Set the production url of your site here
