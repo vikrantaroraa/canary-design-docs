@@ -13,10 +13,9 @@ The timeline displays a list of events in chronological order.
   </tr>
   <tr>
     <td>data</td>
-    <td>Array`<object>`</td>
+    <td>Array`<TimelineData>`</td>
     <td>Yes</td>
-    <td>The data prop is an array of objects. Each object contains 2 key-value pairs. The first key is `milestoneIcon`. Its value is the url of the the icon which you want to show for that particular milestone.
-    The second key is `componentData`. Its value will be an object that will be used as a prop object for `UserTimelineComponent` while mapping the timeline.</td>
+    <td>It is an array of objects of `TimelineData` type</td>
   </tr>
   <tr>
     <td>UserTimelineComponent</td>
@@ -29,7 +28,7 @@ The timeline displays a list of events in chronological order.
     <td>string | null</td>
     <td>No</td>
     <td>
-      The url of the icon that you want to show for every milestone on the timeline. By default, the `Timeline` component picks the `milestoneIcon` passed in the data array prop.
+      The url of the icon that you want to show for every milestone on the timeline. By default, the `Timeline` component picks the `milestoneIcon` passed in the `data` array prop
     </td>
   </tr>
    <tr>
@@ -37,50 +36,68 @@ The timeline displays a list of events in chronological order.
     <td>number</td>
     <td>No</td>
     <td>
-      The size of the milestone icon. This size will also apply to the image that you can pass to replace the milestone icon. Its default value is `40px`.
+      The size of the milestone icon. This size will also apply to the image that you can pass to replace the milestone icon. Its default value is `40px`
     </td>
   </tr> <tr>
     <td>showSameMilestoneIcon</td>
     <td>boolean</td>
     <td>No</td>
     <td>
-      When `true`, it will show a user provided icon i.e. `userMilestoneIcon` for every milestone, its value is `false` by default.
+      When `true`, it will show a user provided icon i.e. `userMilestoneIcon` for every milestone, its value is `false` by default
     </td>
   </tr> <tr>
     <td>timelineGap</td>
     <td>number</td>
     <td>No</td>
     <td>
-      The gap (margin) between two timeline entries on the page. Its default value is `16px`.
+      The gap (margin) between two timeline entries on the page. Its default value is `16px`
+    </td>
+  </tr>
+</table>
+
+# TimelineData
+
+Each object in the `data` array will be used to render a timeline entry. Therefore, every object in the `data` array should be of the following type.
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>milestoneIcon</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>
+      The url of the the icon which you want to show for that particular
+      milestone
+    </td>
+  </tr>
+  <tr>
+    <td>componentPropsData</td>
+    <td>`object`</td>
+    <td>Yes</td>
+    <td>
+      This will be used as the prop object for `UserTimelineComponent`. The type
+      `object` literally means `any object`, hence it can be passed as the prop
+      object to the `UserTimelineComponent` which accepts the prop object of
+      `unknown` type i.e. `
+      <UserTimelineComponent {...componentPropsData} />`
     </td>
   </tr>
 </table>
 
 import BrowserWindow from "@site/src/components/BrowserWindow";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import { ExampleTimeline } from "@site/src/components/Timeline";
 
 <BrowserWindow>
-  <Tabs>
-    <TabItem value="apple" label="Apple">
-      This is an apple 🍎
-    </TabItem>
-    <TabItem value="orange" label="Orange">
-      This is an orange 🍊
-    </TabItem>
-    <TabItem value="banana" label="Banana">
-      This is a banana 🍌
-    </TabItem>
-  </Tabs>
+  <ExampleTimeline />
 </BrowserWindow>
 
-Note:- UserTimelineComponent and defaultUserIcon are just a dummy component and dummy icon. Feel free to create some dummy components and icons yourself.
-
 ```js title="/src/components/ExampleTimeline.ts" showLineNumbers
-import React from "react";
-import { Timeline } from "canary-design";
-import UserTimelineComponent from "src/components/dummy-components/UserTimelineComponent";
-import defaultUserIcon from "src/assets/timeline-default-user.svg";
+import { Timeline, UserTimelineComponent } from "canary-design";
 
 const timelineDataArray = [
   {
@@ -125,8 +142,12 @@ const ExampleTimeline = () => {
       timelineGap={16}
       showSameMilestoneIcon={false}
       UserTimelineComponent={(props) => <UserTimelineComponent {...props} />}
-      userMilestoneIcon={defaultUserIcon}
+      userMilestoneIcon={
+        "https://beautiful-cobbler-7d0481.netlify.app/static/media/user-icon.9ed5eaf22f53676dfcded98a8a61b40b.svg"
+      }
     />
   );
 };
+
+export { ExampleTimeline };
 ```
