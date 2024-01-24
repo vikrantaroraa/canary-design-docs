@@ -1,64 +1,3 @@
-# Steps
-
-Steps is a navigation component that guides users through the steps of a task. When a given task is complicated
-or has a certain sequence in the series of subtasks, we can decompose it into several steps to make things easier.
-
-# Props
-
-<table>
-  <tr>
-    <th>Props</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>steps</td>
-    <td>Array`<StepsDataProps>`</td>
-    <td>Yes</td>
-    <td>It is an array of `StepsDataProps` objects</td>
-  </tr>
-  <tr>
-    <td>activeStep</td>
-    <td>number</td>
-    <td>Yes</td>
-    <td>It is the active step index</td>
-  </tr>
-</table>
-
-# StepsDataProps
-
-Each object in the `steps` array will be used to render a step. Every step object should be of the following type.
-
-<table>
-  <tr>
-    <th>Props</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>title</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>It is the title of the step</td>
-  </tr>
-  <tr>
-    <td>content</td>
-    <td>ReactNode</td>
-    <td>Yes</td>
-    <td>The content that will be rendered when a particular step is active</td>
-  </tr>
-</table>
-
-import BrowserWindow from "@site/src/components/BrowserWindow";
-import { ExampleSteps } from "@site/src/components/Steps";
-
-<BrowserWindow>
-  <ExampleSteps />
-</BrowserWindow>
-
-```js title="/src/components/ExampleSteps.ts" showLineNumbers
 import React, { useState } from "react";
 import {
   DummyComponent1,
@@ -132,4 +71,3 @@ const ExampleSteps = () => {
 };
 
 export { ExampleSteps };
-```
