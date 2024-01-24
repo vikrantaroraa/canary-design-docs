@@ -73,12 +73,14 @@ Note:- DummyComponent1, DummyComponent2 and DummyComponent3 are just some dummy 
 
 ```js title="/src/components/ExampleSteps.ts" showLineNumbers
 import React, { useState } from "react";
-import { Button } from "canary-design";
-import { Steps } from "canary-design";
-import { StepsDataProps } from "canary-design";
-import DummyComponent1 from "src/components/dummy-components/Component1";
-import DummyComponent2 from "src/components/dummy-components/Component2";
-import DummyComponent3 from "src/components/dummy-components/Component3";
+import {
+  DummyComponent1,
+  DummyComponent2,
+  DummyComponent3,
+  MiniatureLibraryButton,
+  Steps,
+  StepsDataProps,
+} from "canary-design";
 
 const steps: StepsDataProps[] = [
   {
