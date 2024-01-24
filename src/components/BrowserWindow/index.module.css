@@ -76,7 +76,11 @@
 }
 
 .browserWindowBody {
-  background-color: var(--ifm-background-color);
+  /* background-color: var(--ifm-background-color); */
+  /* background-color: #f8f8f8; */
+  /* setting white as the background-color because we need it to showcase components*/
+  background-color: #f6f8fa;
+  color: var(--ifm-color-gray-800);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   padding: 1rem;

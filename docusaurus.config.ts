@@ -9,7 +9,8 @@ const config: Config = {
   favicon: "images/canary.ico",
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-site.example.com",
+  // url: "https://your-docusaurus-site.example.com",
+  url: "https://canary-design.netlify.app/",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -130,6 +131,11 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismDarkTheme,
       // darkTheme: prismThemes.vsDark,
+    },
+    colorMode: {
+      defaultMode: "dark",
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
     },
   } satisfies Preset.ThemeConfig,
 };
