@@ -40,30 +40,23 @@ This is another tabs component. Tabs make it easy to switch between different vi
 </table>
 
 import BrowserWindow from "@site/src/components/BrowserWindow";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import { ExampleTabsTypeB } from "@site/src/components/TabsTypeB";
 
 <BrowserWindow>
-  <Tabs>
-    <TabItem value="apple" label="Apple">
-      This is an apple 🍎
-    </TabItem>
-    <TabItem value="orange" label="Orange">
-      This is an orange 🍊
-    </TabItem>
-    <TabItem value="banana" label="Banana">
-      This is a banana 🍌
-    </TabItem>
-  </Tabs>
+  <ExampleTabsTypeB />
 </BrowserWindow>
 
-Note:- DummyComponent1, DummyComponent2 and DummyComponent3 are just some dummy components. Feel free to create some dummy components yourself.
-
 ```js title="/src/components/ExampleTabs.ts" showLineNumbers
-import DummyComponent1 from "src/components/dummy-components/Component1";
-import DummyComponent2 from "src/components/dummy-components/Component2";
-import DummyComponent3 from "src/components/dummy-components/Component3";
-import { PanelContainer, Tab, TabPanel, TabsTypeB } from "canary-design";
+import { useState } from "react";
+import {
+  PanelContainer,
+  Tab,
+  TabPanel,
+  TabsTypeB,
+  DummyComponent1,
+  DummyComponent2,
+  DummyComponent3,
+} from "canary-design";
 
 const ExampleTabsTypeB = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -97,4 +90,6 @@ const ExampleTabsTypeB = () => {
     </>
   );
 };
+
+export { ExampleTabsTypeB };
 ```

@@ -65,30 +65,19 @@ This is a tabs component. Tabs make it easy to switch between different views.
 </table>
 
 import BrowserWindow from "@site/src/components/BrowserWindow";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import { ExampleTabsTypeA } from "@site/src/components/TabsTypeA";
 
 <BrowserWindow>
-  <Tabs>
-    <TabItem value="apple" label="Apple">
-      This is an apple 🍎
-    </TabItem>
-    <TabItem value="orange" label="Orange">
-      This is an orange 🍊
-    </TabItem>
-    <TabItem value="banana" label="Banana">
-      This is a banana 🍌
-    </TabItem>
-  </Tabs>
+  <ExampleTabsTypeA />
 </BrowserWindow>
 
-Note:- DummyComponent1 and DummyComponent3 are just some dummy components. Feel free to create some dummy components yourself.
-
 ```js title="/src/components/ExampleTabs.ts" showLineNumbers
-import DummyComponent1 from "src/components/dummy-components/Component1";
-import DummyComponent3 from "src/components/dummy-components/Component3";
-import { TabsDataProps } from "canary-design";
-import { TabsTypeA } from "canary-design";
+import {
+  TabsTypeA,
+  TabsDataProps,
+  DummyComponent1,
+  DummyComponent3,
+} from "canary-design";
 
 const tabsData: TabsDataProps[] = [
   {
@@ -121,4 +110,6 @@ const ExampleTabsTypeA = () => {
     />
   );
 };
+
+export { ExampleTabsTypeA };
 ```
