@@ -121,34 +121,27 @@ The `UserNavigationButtons` can be used to pass a user navigation component. It 
 </table>
 
 import BrowserWindow from "@site/src/components/BrowserWindow";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import { ExampleCarouselTypeB } from "@site/src/components/CarouselTypeB";
 
 <BrowserWindow>
-  <Tabs>
-    <TabItem value="apple" label="Apple">
-      This is an apple 🍎
-    </TabItem>
-    <TabItem value="orange" label="Orange">
-      This is an orange 🍊
-    </TabItem>
-    <TabItem value="banana" label="Banana">
-      This is a banana 🍌
-    </TabItem>
-  </Tabs>
+  <ExampleCarouselTypeB />
 </BrowserWindow>
 
 ```js title="ExampleCarousel.ts" showLineNumbers
-import Image1 from "src/assets/carousel-image-1.jpg";
-import Image2 from "src/assets/carousel-image-2.jpg";
-import Image3 from "src/assets/carousel-image-3.jpg";
-import Image4 from "src/assets/carousel-image-4.jpg";
-import Image5 from "src/assets/carousel-image-5.jpg";
-import UserIndicatorComponent from "src/components/dummy-components/UserIndicatorComponent";
-import UserNavigationButtons from "src/components/dummy-components/UserNavigationButtons";
-import { CarouselTypeB, ImagePanel } from "canary-design";
+import {
+  CarouselTypeB,
+  ImagePanel,
+  UserIndicatorComponent,
+  UserNavigationButtons,
+} from "canary-design";
 
-const images = [Image1, Image2, Image3, Image4, Image5];
+const images = [
+  "https://cdn.jwplayer.com/v2/media/THP7cYwK/poster.jpg?width=720",
+  "https://www.beautifulworld.com/wp-content/uploads/2016/10/buffalo-yellowstone-national-park.jpg",
+  "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1170,h_780/w_72,x_13,y_13,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/rcoclkcqcpyoogx1rbvl/4-DayYellowstoneNationalParkLuxuryTourfromSaltLakeCity.jpg",
+  "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/rockcms/2022-07/220708-bison-sj-424p-99b8b1.jpg",
+  "https://images.squarespace-cdn.com/content/v1/57afe07729687fbd6a7971ad/1471718394640-AYK8C3POPTKL2GU5DGRM/Glacier.National.Park.original.494.jpg?format=2500w",
+];
 
 function ExampleCarouselTypeB() {
   return (
@@ -190,113 +183,6 @@ function ExampleCarouselTypeB() {
     </div>
   );
 }
-```
 
-### UserIndicatorComponent
-
-```js title="src/components/UserIndicatorComponent/index.ts" showLineNumbers
-import styles from "src/components/UserIndicatorComponent/index.module.css";
-
-interface UserIndicatorComponentProps {
-  index: number;
-  activeIndex: number;
-  changeImage: (index: number) => void;
-}
-
-const UserIndicatorComponent = ({
-  index,
-  activeIndex,
-  changeImage,
-}: UserIndicatorComponentProps) => {
-  return (
-    <div className={styles["dot"]} onClick={() => changeImage(index)}>
-      {index === activeIndex && <div className={styles["inner-dot"]}></div>}
-    </div>
-  );
-};
-```
-
-```css title="src/components/UserIndicatorComponent/index.module.css"
-.dot {
-  height: 15px;
-  width: 15px;
-  background-color: #efefef;
-  border-radius: 20%;
-  cursor: pointer;
-  padding: 2px;
-}
-
-.inner-dot {
-  height: 100%;
-  width: 100%;
-  border-radius: 20%;
-  background-color: grey;
-}
-```
-
-### UserNavigationButtons
-
-```js title="src/components/UserNavigationButtons/index.ts" showLineNumbers
-import styles from "src/components/UserNavigationButtons/index.module.css";
-import leftIconBlack from "src/assets/caret-left-black.svg";
-import rightIconBlack from "src/assets/caret-right-black.svg";
-import leftIconWhite from "src/assets/caret-left-white.png";
-import rightIconWhite from "src/assets/caret-right-white.png";
-
-interface UserNavigationButtonsProps {
-  slideLeft: () => void;
-  slideRight: () => void;
-}
-
-function UserNavigationButtons({
-  slideLeft,
-  slideRight,
-}: UserNavigationButtonsProps) {
-  return (
-    <div className={styles["navigation-buttons"]}>
-      <div className={styles["nav-button"]} onClick={slideLeft}>
-        <div className={styles["icon-container"]}>
-          <img src={leftIconWhite} />
-        </div>
-      </div>
-      <div className={styles["nav-button"]} onClick={slideRight}>
-        <div className={styles["icon-container"]}>
-          <img src={rightIconWhite} />
-        </div>
-      </div>
-    </div>
-  );
-}
-```
-
-```css title="src/components/UserNavigationButtons/index.module.css"
-.navigation-buttons {
-  display: flex;
-  justify-content: space-between;
-  padding: 2px 8px;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.nav-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.icon-container {
-  height: 24px;
-  width: 24px;
-}
-
-.icon-container img {
-  height: 100%;
-  width: 100%;
-}
+export { ExampleCarouselTypeB };
 ```
