@@ -55,15 +55,19 @@ import { ExampleDrawer } from "@site/src/components/Drawer";
   <ExampleDrawer />
 </BrowserWindow>
 
+> Note:- You will need to import your own icons.
+>
+> Tip:- You can just replace the icons with labels to get the code working.
+
 ```js title="/src/components/Drawer.ts" showLineNumbers
 import React, { useState } from "react";
 import { Drawer } from "canary-design";
-import closeIcon from "../../assets/close-icon.svg";
-import cartIcon from "../../assets/cart.svg";
-import wishListIcon from "../../assets/heart.svg";
-import userIcon from "../../assets/user.svg";
-import menuIcon from "../../assets/menu-icon.svg";
-import allProductsIcon from "../../assets/all-products-icon.svg";
+import closeIcon from "src/assets/close-icon.svg";
+import cartIcon from "src/assets/cart.svg";
+import wishListIcon from "src/assets/heart.svg";
+import userIcon from "src/assets/user.svg";
+import menuIcon from "src/assets/menu-icon.svg";
+import allProductsIcon from "src/assets/all-products-icon.svg";
 
 const ExampleDrawer = () => {
   const [showDrawer, setShowDrawer] = useState(false);
