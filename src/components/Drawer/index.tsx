@@ -1,69 +1,11 @@
-# Drawer
-
-Navigation is an important part of any website, as a good navigation setup allows users to move around the site quickly and efficiently. This component provides a drawer (also referred to as a sidebar) which can be used for navigation in a web app.
-
-Note-1:- The Drawer component has `position: fixed` so it always gets positioned according to the viewport, i.e. top: 0, left: 0 (or right: 0). If you want to position the drawer w.r.t. some parent element say X, then you can pass `position: absolute` to the style prop of the Drawer and give X the `position: relative`.
-
-Note-2:- The Drawer below is positioned w.r.t. the parent container element as explained in the Note-1 above.
-
-# Props
-
-<table>
-  <tr>
-    <th>Props</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>showDrawer</td>
-    <td>boolean</td>
-    <td>Yes</td>
-    <td>Controls the opening and closing of the drawer.</td>
-  </tr>
-  <tr>
-    <td>slideFrom</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>
-      Controls where the drawer slides from. `slideFrom` only takes either of
-      the 2 values: `left` and `right`
-    </td>
-  </tr>
-  <tr>
-    <td>children</td>
-    <td>`<JSX.Element>` | Array`<JSX.Element>`</td>
-    <td>Yes</td>
-    <td>
-      The component that you pass to children will be rendered inside the drawer 
-    </td>
-  </tr>
-  <tr>
-    <td>style</td>
-    <td>object</td>
-    <td>No</td>
-    <td>
-      A style object that can be used to style the drawer
-    </td>
-  </tr>
-</table>
-
-import BrowserWindow from "@site/src/components/BrowserWindow";
-import { ExampleDrawer } from "@site/src/components/Drawer";
-
-<BrowserWindow>
-  <ExampleDrawer />
-</BrowserWindow>
-
-```js title="/src/components/Drawer.ts" showLineNumbers
 import React, { useState } from "react";
 import { Drawer } from "canary-design";
-import closeIcon from "../../assets/close-icon.svg";
-import cartIcon from "../../assets/cart.svg";
-import wishListIcon from "../../assets/heart.svg";
-import userIcon from "../../assets/user.svg";
-import menuIcon from "../../assets/menu-icon.svg";
-import allProductsIcon from "../../assets/all-products-icon.svg";
+import CartIcon from "@site/static/images/cart.svg";
+import WishListIcon from "@site/static/images/heart.svg";
+import UserIcon from "@site/static/images/user.svg";
+import CloseIcon from "@site/static/images/close-icon.svg";
+import MenuIcon from "@site/static/images/menu-icon.svg";
+import AllProductsIcon from "@site/static/images/all-products-icon.svg";
 
 const ExampleDrawer = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -72,12 +14,12 @@ const ExampleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
 
-  const headerItemsArray = [wishListIcon, cartIcon, userIcon];
+  const headerItemsArray = [WishListIcon, CartIcon, UserIcon];
   const menuItemsArray = [
-    { icon: allProductsIcon, label: "All Products" },
-    { icon: userIcon, label: "Sign In" },
-    { icon: wishListIcon, label: "Wishlist" },
-    { icon: cartIcon, label: "Cart" },
+    { icon: AllProductsIcon, label: "All Products" },
+    { icon: UserIcon, label: "Sign In" },
+    { icon: WishListIcon, label: "Wishlist" },
+    { icon: CartIcon, label: "Cart" },
   ];
 
   const mainContainerStyle: React.CSSProperties = {
@@ -148,14 +90,14 @@ const ExampleDrawer = () => {
       <div style={appHeaderStyle}>
         <span onClick={toggleShowDrawer} title="Click to open menu drawer">
           <span style={imageContainerStyle}>
-            <img src={menuIcon} style={imageStyle} />
+            <MenuIcon style={imageStyle} />
           </span>
         </span>
         <div style={navMenuStyle}>
-          {headerItemsArray.map((icon, index) => {
+          {headerItemsArray.map((Icon, index) => {
             return (
               <span style={imageContainerStyle} title="dummy icon" key={index}>
-                <img src={icon} style={imageStyle} />
+                <Icon style={imageStyle} />
               </span>
             );
           })}
@@ -166,6 +108,7 @@ const ExampleDrawer = () => {
         slideFrom={"left"}
         style={{
           position: "absolute",
+          width: showDrawer ? (window.innerWidth > 600 ? "500px" : "100%") : 0,
           height: "100%",
         }}
       >
@@ -173,16 +116,17 @@ const ExampleDrawer = () => {
           <span>Flipkart</span>
           <span onClick={toggleShowDrawer} title="Click to close menu drawer">
             <span style={imageContainerStyle}>
-              <img src={closeIcon} style={imageStyle} />
+              <CloseIcon style={imageStyle} />
             </span>
           </span>
         </div>
         <div style={menuItemsContainerStyle}>
           {menuItemsArray.map(({ icon, label }, index) => {
+            let Icon = icon;
             return (
               <div style={sidebarMenuItem} key={index}>
                 <span style={imageContainerStyle}>
-                  <img src={icon} style={imageStyle} />
+                  <Icon style={imageStyle} />
                 </span>
                 {label}
               </div>
@@ -195,4 +139,3 @@ const ExampleDrawer = () => {
 };
 
 export { ExampleDrawer };
-```
