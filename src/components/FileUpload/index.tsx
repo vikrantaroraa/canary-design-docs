@@ -1,9 +1,9 @@
 import React from "react";
 import { FileUpload } from "canary-design";
 
+// This component is used to showcase the "FileUpload" component when dragging is disabled, hence we are not
+// passing the "dragging" prop here.
 function FileUploadExample() {
-  // This component is used to showcase the "FileUpload" component when dragging is disabled, hence we are not
-  // passing the "dragging" prop here.
   return (
     <div>
       <FileUpload
