@@ -8,7 +8,7 @@ You can use this component when you need to:-
 - Show the process of uploading.
 - Upload files by dragging and dropping.
 
-The `FileUpload` component is internally made up of 2 components, the `<SelectFile />` component and the `<DragAndDrop />` component. The `<SelectFile />` only allows to upload the file by manually selecting a file by opening the desktop storage window. The `<DragAndDrop />` allows us to upload the file both by opening the desktop storage window and by dragging the file into the component viewport.
+The `FileUpload` component is internally made up of 2 components, the `<SelectFile />` component and the `<DragAndDrop />` component. `<SelectFile />` only allows to upload a file by manually selecting the file by opening the desktop storage window. `<DragAndDrop />` allows us to upload a file both by opening the desktop storage window and by dragging the file and dropping it into the component viewport.
 
 # Props
 
@@ -45,7 +45,7 @@ The `FileUpload` component is internally made up of 2 components, the `<SelectFi
       If you want to hide the image wall ( i.e the component that shows the
       uploaded files ), then you can set this to `false`. Its default value is `true`
 
-      Note:- This prop is only passed to the `<SelectFile />` component.
+      Note:- This prop is only passed to the `<SelectFile />` component internally by `FileUpload`.
     </td>
 
   </tr>
@@ -56,7 +56,7 @@ The `FileUpload` component is internally made up of 2 components, the `<SelectFi
     <td>
       If you want to hide the delete icon, then you can set this to `false`. Its default value is `true`
 
-      Note:- This prop is only passed to the `<SelectFile />` component.
+      Note:- This prop is only passed to the `<SelectFile />` component  internally by `FileUpload`.
     </td>
 
   </tr>
@@ -70,24 +70,14 @@ The `FileUpload` component is internally made up of 2 components, the `<SelectFi
   </tr>
 </table>
 
-Note:- The type `FileType` is used so that all the returned files have a common type. All returned files will have a `url` ( where they are stored in the system ), `name`, `id`, `size` ( in kb ) and `type` ( like pdf, image/jpeg, image/png, text etc ).
+> Note:- The type `FileType` is used so that all the returned files have a common structure. All returned files will have a `url` ( where they are stored in the system ), `name`, `id`, `size` ( in kb ) and `type` ( like pdf, image/jpeg, image/png, text etc ).
 
 import BrowserWindow from "@site/src/components/BrowserWindow";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import { FileUploadExample } from "@site/src/components/FileUpload";
+import { FileUploadDraggingExample } from "@site/src/components/FileUploadDragging";
 
 <BrowserWindow>
-  <Tabs>
-    <TabItem value="apple" label="Apple">
-      This is an apple 🍎
-    </TabItem>
-    <TabItem value="orange" label="Orange">
-      This is an orange 🍊
-    </TabItem>
-    <TabItem value="banana" label="Banana">
-      This is a banana 🍌
-    </TabItem>
-  </Tabs>
+  <FileUploadExample />
 </BrowserWindow>
 
 ```js title="/src/components/FileUploadExample.ts" showLineNumbers
@@ -102,11 +92,41 @@ function FileUploadExample() {
         getFiles={(files: unknown) => {
           console.log("files from getFiles: ", files);
         }}
-        showImageWall={false}
-        showDeleteIcon={false}
-        dragging
+        showImageWall={true}
+        showDeleteIcon={true}
       />
     </div>
   );
 }
+
+export { FileUploadExample };
+```
+
+The above example shows the `FileUpload` component when `drag-and-drop` is disabled. To checkout the component with `drag-and-drop` enabled, checkout the example shown below.
+
+<BrowserWindow>
+  <FileUploadDraggingExample />
+</BrowserWindow>
+
+```js title="/src/components/FileUploadDraggingExample.ts" showLineNumbers
+import React from "react";
+import { FileUpload } from "canary-design";
+
+function FileUploadDraggingExample() {
+  return (
+    <div>
+      <FileUpload
+        multiple
+        getFiles={(files: unknown) => {
+          console.log("files from getFiles: ", files);
+        }}
+        showImageWall={true}
+        showDeleteIcon={true}
+        dragging // <-- dragging is enabled
+      />
+    </div>
+  );
+}
+
+export { FileUploadDraggingExample };
 ```
