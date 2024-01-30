@@ -1,86 +1,6 @@
-# Tour
-
-Tour is a popup component that can be used for guiding users through a product.
-
-- Onboard your users by explaining how to use your product and answer common questions.
-- With highlight feature, you can remove distractions and focus your users attention on what matters.
-- Provide contextual help for your users, explain how to use your product and answer common questions.
-- Highlight new features, explain how to use them and make sure your users don't miss them.
-
-# Props
-
-<table>
-  <tr>
-    <th>Props</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>data</td>
-    <td>Array`<TourData>`</td>
-    <td>Yes</td>
-    <td>It is an array of `TourData` objects</td>
-  </tr>
-  <tr>
-    <td>children</td>
-    <td>`JSX.Element` | Array`JSX.Element`</td>
-    <td>Yes</td>
-    <td>The component that needs to be explained ( shown around ) in the tour</td>
-  </tr>
-</table>
-
-# TourData
-
-It is an array of objects. Each object contains the information about an element, that should be shown in the popover content when that particular element is focused during the tour.
-
-<table>
-  <tr>
-    <th>Props</th>
-    <th>Type</th>
-    <th>Required</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>step</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>
-      It is the number of step at which an element will be focused during the
-      tour
-    </td>
-  </tr>
-  <tr>
-    <td>content</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>
-      The information about the element which will be shown in the popover when
-      that element is focused during the tour
-    </td>
-  </tr>
-  <tr>
-    <td>popupPosition</td>
-    <td>string `enum`</td>
-    <td>Yes</td>
-    <td>
-      This can be used to set the position of the popover around the focused
-      element. It only accepts the following values:- `top` | `left` | `bottom`
-      | `right`
-    </td>
-  </tr>
-</table>
-
-import BrowserWindow from "@site/src/components/BrowserWindow";
-import { ExampleTour } from "@site/src/components/Tour";
-
-<BrowserWindow>
-  <ExampleTour />
-</BrowserWindow>
-
-```js title="/src/components/ExampleTour.ts" showLineNumbers
 import React, { useRef } from "react";
-import { Tour, TourData } from "canary-design";
+import { Tour } from "canary-design";
+import { TourData } from "canary-design";
 
 const tourData: TourData[] = [
   {
@@ -206,4 +126,3 @@ const ExampleTour = () => {
 };
 
 export { ExampleTour };
-```
