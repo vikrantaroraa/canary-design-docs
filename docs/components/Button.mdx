@@ -1,0 +1,79 @@
+# Button
+
+Buttons allow users to take actions, and make choices, with a single tap.
+
+# Props
+
+<table>
+  <tr>
+    <th>Props</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>children</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>The label of the button</td>
+  </tr>
+  <tr>
+    <td>onClick</td>
+    <td>function`() => void`</td>
+    <td>Yes</td>
+    <td>
+      If you want to do something on button click, then you can do it by passing
+      the onClick function
+    </td>
+  </tr>
+  <tr>
+    <td>style</td>
+    <td>object</td>
+    <td>No</td>
+    <td>A style object that can be used to style the button</td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>string</td>
+    <td>No</td>
+    <td>
+      The `Button` component provides 2 types of buttons. By default the button
+      rendered will be a `secondary` button. If you want to render a `primary`
+      button, then you can pass the value `fill` to the `type` prop.
+    </td>
+  </tr>
+</table>
+
+import BrowserWindow from "@site/src/components/BrowserWindow";
+import { ExampleButton } from "@site/src/components/Button";
+
+<BrowserWindow>
+  <ExampleButton />
+</BrowserWindow>
+
+```js title="/src/components/ExampleButton.ts" showLineNumbers
+import React from "react";
+import { Button } from "canary-design";
+
+const ExampleButton = () => {
+  const buttonsContainerStyle: React.CSSProperties = {
+    marginTop: "1rem",
+    display: "flex",
+    gap: "0.8rem",
+    padding: 5,
+  };
+
+  return (
+    <div style={buttonsContainerStyle}>
+      <Button type="fill" onClick={() => alert("Canary Design is awesome!")}>
+        Primary
+      </Button>
+      <Button onClick={() => alert("Canary Design is awesome!")}>
+        Secondary
+      </Button>
+    </div>
+  );
+};
+
+export { ExampleButton };
+```

@@ -79,7 +79,7 @@ const ExampleTour = () => {
 
   // Note2:- We could have directly passed "ref={(thisElement) => (tourRefAndStartButtonRef?.current[0] =
   // thisElement)}" to the button itself, but if we do so, then because of the "?" that is used just after the
-  // "tourRefAndStartButtonRef" for conditionally pasing the ref, we will get an error "Support for the experimental
+  // "tourRefAndStartButtonRef" for conditionally passing the ref, we will get an error "Support for the experimental
   // syntax 'optionalChainingAssign' isn't currently enabled". Hence we have used an "if" condition by creating a
   // new function "passRefConditionally".
   const passRefConditionally = (thisElement: HTMLButtonElement) => {
