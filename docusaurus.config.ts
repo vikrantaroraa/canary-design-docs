@@ -94,19 +94,19 @@ const config: Config = {
           ],
         },
         {
-          title: "Community",
+          title: "Find Me On",
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/in/vikrantaroraa/",
             },
             {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
+              label: "Github",
+              href: "https://github.com/vikrantaroraa",
             },
             {
               label: "Twitter",
-              href: "https://twitter.com/docusaurus",
+              href: "https://twitter.com/vikrantaroraa",
             },
           ],
         },
@@ -114,12 +114,8 @@ const config: Config = {
           title: "More",
           items: [
             {
-              label: "Blog",
-              to: "/blog",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
+              label: "Portfolio",
+              href: "https://vikrantaroraa.netlify.app/",
             },
           ],
         },
