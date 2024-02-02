@@ -76,7 +76,7 @@ import { ExampleTour } from "@site/src/components/Tour";
   <ExampleTour />
 </BrowserWindow>
 
-```js title="/src/components/ExampleTour.ts" showLineNumbers
+```js title="src/components/ExampleTour/index.tsx" showLineNumbers
 import React, { useRef } from "react";
 import { Tour, TourData } from "canary-design";
 
@@ -149,7 +149,6 @@ const ExampleTour = () => {
 
   const buttonContainerStyle: React.CSSProperties = {
     display: "flex",
-    justifyContent: "center",
   };
 
   // Note1:- if we don't use the following if condition, then we will get an error when we navigate to a different

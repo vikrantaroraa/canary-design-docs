@@ -70,7 +70,6 @@ const ExampleTour = () => {
 
   const buttonContainerStyle: React.CSSProperties = {
     display: "flex",
-    justifyContent: "center",
   };
 
   // Note1:- if we don't use the following if condition then we will get an error when the component is unmounted.
